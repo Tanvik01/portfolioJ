@@ -1,0 +1,132 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-paper: var(--paper);
+  --color-paper-foreground: var(--paper-foreground);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-tape: var(--tape);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--ink);
+  --color-primary-foreground: var(--paper);
+  --color-card: var(--paper);
+  --color-card-foreground: var(--paper-foreground);
+  --color-destructive: oklch(0.577 0.245 27.325);
+  --color-destructive-foreground: oklch(0.984 0.003 247.858);
+  --color-input: var(--border);
+  --color-ring: var(--ink);
+  --color-popover: var(--paper);
+  --color-popover-foreground: var(--paper-foreground);
+  --color-secondary: var(--muted);
+  --color-secondary-foreground: var(--paper-foreground);
+
+  --font-hand: "Caveat", cursive;
+  --font-note: "Kalam", cursive;
+  --font-display: "Fraunces", serif;
+  --font-mono: "Special Elite", monospace;
+}
+
+:root {
+  --radius: 0.75rem;
+  /* Warm dark like the reference */
+  --background: oklch(0.15 0.015 30);
+  --foreground: oklch(0.92 0.05 45);
+
+  /* Cream paper */
+  --paper: oklch(0.93 0.035 75);
+  --paper-foreground: oklch(0.35 0.15 25);
+
+  /* Red-orange ink */
+  --ink: oklch(0.58 0.19 28);
+  --ink-soft: oklch(0.65 0.14 28);
+
+  --tape: oklch(0.85 0.09 90 / 0.85);
+
+  --accent: oklch(0.72 0.16 55);
+  --accent-foreground: oklch(0.2 0.05 30);
+
+  --muted: oklch(0.88 0.03 75);
+  --muted-foreground: oklch(0.5 0.1 30);
+
+  --border: oklch(0.58 0.19 28 / 0.4);
+}
+
+.dark {
+  --background: oklch(0.15 0.015 30);
+  --foreground: oklch(0.92 0.05 45);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html, body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-note);
+  }
+}
+
+/* Paper grid background */
+@utility paper-grid {
+  background-image:
+    linear-gradient(to right, oklch(0.58 0.19 28 / 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.58 0.19 28 / 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@utility paper-lined {
+  background-image: linear-gradient(to bottom, transparent 31px, oklch(0.58 0.19 28 / 0.18) 32px);
+  background-size: 100% 32px;
+}
+
+@utility ink {
+  color: var(--ink);
+}
+
+@utility sketch-border {
+  border: 2px solid var(--ink);
+  border-radius: 14px 18px 12px 20px / 18px 12px 20px 14px;
+}
+
+@utility tape {
+  background: var(--tape);
+  box-shadow: 0 2px 6px oklch(0 0 0 / 0.35);
+}
+
+@utility hand-underline {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8'><path d='M2 5 Q 50 1, 100 4 T 198 3' fill='none' stroke='%23d94a1f' stroke-width='2' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 8px;
+  padding-bottom: 8px;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+@utility wiggle {
+  animation: wiggle 3s ease-in-out infinite;
+}
+
+@keyframes draw {
+  from { stroke-dashoffset: var(--dash, 1000); }
+  to { stroke-dashoffset: 0; }
+}
