@@ -52,23 +52,6 @@ export function Experience() {
         <div className="relative mt-20 grid gap-10 md:grid-cols-[240px_1fr] md:gap-14">
           {/* Timeline rail */}
           <div className="relative">
-            <svg
-              className="absolute left-6 top-0 hidden md:block"
-              width="4"
-              height="100%"
-              viewBox="0 0 4 400"
-              preserveAspectRatio="none"
-            >
-              <path
-                d="M2 0 Q 4 100, 2 200 T 2 400"
-                stroke="var(--ink)"
-                strokeWidth="2"
-                strokeDasharray="6 6"
-                fill="none"
-                opacity="0.5"
-              />
-            </svg>
-
             <div className="flex md:flex-col gap-4 md:gap-16 md:pt-6">
               {experiences.map((exp, i) => (
                 <button
