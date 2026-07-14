@@ -3,6 +3,13 @@ import { useState } from "react";
 
 const projects = [
   {
+    title: "DripCheck",
+    stack: "React · Tailwind CSS · Gemini API",
+    body: "Upload photos of your clothes, tell it the vibe you're going for, and it styles an outfit for you.",
+    live: "https://drip-check-ten.vercel.app/",
+    github: "https://github.com/Tanvik01/DripCheck",
+  },
+  {
     title: "Talk-to-DB",
     stack: "React · Express · Postgres · Llama 3",
     body: "For the people who just wanna see data and not code for it. Uses NLP to convert voice to SQL queries.",
@@ -48,7 +55,7 @@ export function Projects() {
         </motion.h2>
         <p className="mt-3 font-hand text-xl ink/60">↓ pick one</p>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-[1fr_1.4fr]">
+        <div className="mt-12 grid gap-8 md:grid-cols-[1fr_1.4fr] md:items-start">
           {/* Tab list */}
           <div className="flex flex-col gap-3">
             {projects.map((p, i) => (
