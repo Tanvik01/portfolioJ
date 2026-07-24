@@ -1,88 +1,94 @@
 import { motion } from "framer-motion";
-import heroSketch from "@/assets/hero-sketch.jpg";
+import doodle from "@/assets/doodle.png";
 
 export function Hero() {
   return (
-    <section id="top" className="relative min-h-screen px-4 pt-28 pb-16 md:pt-32">
+    <section id="top" className="relative px-4 pt-24 pb-8 md:pt-28">
       {/* margin doodles */}
       <MarginDoodles />
 
       <div className="mx-auto max-w-6xl">
-        <div className="relative bg-paper text-paper-foreground sketch-border paper-grid p-8 md:p-16 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)]">
-          <div className="absolute -top-3 left-16 h-6 w-24 -rotate-6 tape rounded-sm" />
-          <div className="absolute -top-3 right-20 h-6 w-28 rotate-3 tape rounded-sm" />
-          <div className="absolute -bottom-3 right-24 h-6 w-24 -rotate-3 tape rounded-sm" />
+        {/* Tape strips sit on the outer wrapper so they aren't clipped */}
+        <div className="relative">
+          <div className="absolute -top-3 left-16 z-10 h-6 w-24 -rotate-6 tape rounded-sm shadow-md" />
+          <div className="absolute -top-3 right-20 z-10 h-6 w-28 rotate-3 tape rounded-sm shadow-md" />
+        <div className="relative bg-paper text-paper-foreground sketch-border paper-grid shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)]">
 
-          <div className="grid gap-10 md:grid-cols-[1.1fr_1fr] md:gap-16 items-center">
-            <div>
-              <motion.p
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-                className="font-hand text-3xl ink"
-              >
-                Tanvi ~
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.35 }}
-                className="mt-1 font-note text-lg ink/80"
-              >
-                Full stack developer
-              </motion.p>
+          <div className="grid md:grid-cols-2 min-h-[360px]">
+            {/* Left: text */}
+            <div className="p-8 md:p-12 flex flex-col justify-center">
+              <div className="flex items-baseline gap-3 flex-wrap">
+                <motion.p
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="font-hand text-2xl ink"
+                >
+                  Tanvi ~
+                </motion.p>
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.35 }}
+                  className="font-note text-base ink/70"
+                >
+                  Full stack developer
+                </motion.p>
+              </div>
 
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                className="mt-6 font-display text-5xl leading-[1.05] md:text-7xl ink"
+                transition={{ delay: 0.5, duration: 0.7 }}
+                className="mt-3 font-display text-4xl leading-[1.08] md:text-5xl lg:text-6xl ink"
               >
                 Software should{" "}
-                <span className="italic font-hand text-6xl md:text-8xl">just</span>{" "}
-                <br className="hidden md:block" />
+                <span className="italic font-hand text-5xl md:text-6xl lg:text-7xl">just </span>{" "}
                 work.
               </motion.h1>
 
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
-                className="mt-8 max-w-md font-hand text-xl leading-relaxed ink/90"
+                transition={{ delay: 0.75 }}
+                className="mt-4 max-w-lg font-hand text-lg leading-relaxed ink/90"
               >
-                I'm a CS grad '26, a tech enthusiast, and I have previously
-                worked at <span className="relative inline-block ink font-semibold px-2"><svg className="pointer-events-none absolute inset-0 h-full w-full -z-0" viewBox="0 0 120 40" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M8 22 Q 20 4, 60 6 Q 108 8, 112 20 Q 116 34, 60 34 Q 10 34, 8 22" stroke="var(--ink)" strokeWidth="2" fill="none" strokeLinecap="round" /></svg><span className="relative">startups</span></span> and helped them build full-fledged software
-                products. I have also won <span className="hand-underline ink font-semibold">hackathons</span> for social good, and I
-                love binge watching shows and cats.
+                CS grad '26. Previously built full-fledged software products at{" "}
+                <span className="relative inline-block ink font-semibold px-1.5">
+                  <svg className="pointer-events-none absolute inset-0 h-full w-full -z-0" viewBox="0 0 120 40" preserveAspectRatio="none" fill="none" aria-hidden="true">
+                    <path d="M8 22 Q 20 4, 60 6 Q 108 8, 112 20 Q 116 34, 60 34 Q 10 34, 8 22" stroke="var(--ink)" strokeWidth="2" fill="none" strokeLinecap="round" />
+                  </svg>
+                  <span className="relative">startups</span>
+                </span>
+                , won <span className="hand-underline ink font-semibold">hackathons</span> for social good, and love binge watching shows and cats.
               </motion.p>
 
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1 }}
-                className="mt-6 font-note text-sm ink/70"
+                className="mt-3 font-note text-sm ink/60"
               >
                 Bengaluru • GMT +5:30
               </motion.p>
             </div>
 
+            {/* Right: doodle — fills entire right half */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, rotate: 4 }}
-              animate={{ opacity: 1, scale: 1, rotate: 2 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.9 }}
-              whileHover={{ rotate: -1, scale: 1.02 }}
-              className="relative mx-auto max-w-md"
+              className="relative flex items-center justify-center p-4 md:p-6"
             >
               <img
-                src={heroSketch}
-                alt="Sketch of a developer at a desk with servers, birds and plants"
-                className="w-full rounded-lg mix-blend-multiply"
+                src={doodle}
+                alt="A hand-drawn doodle"
+                className="w-full h-full object-contain"
               />
             </motion.div>
           </div>
         </div>
-
-        <ScrollHint />
+        </div>
       </div>
     </section>
   );

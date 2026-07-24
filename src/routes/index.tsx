@@ -18,10 +18,10 @@ function Index() {
       <CursorDoodle />
       <Nav />
       <Hero />
-      <Beliefs />
+      <Skills />
       <Experience />
       <Projects />
-      <Skills />
+      <Beliefs />
       <Contact />
     </main>
   );
