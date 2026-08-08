@@ -20,6 +20,7 @@ export function PaperCard({
 }: Props) {
   return (
     <motion.div
+      data-click-sound="card"
       initial={{ opacity: 0, y: 40, rotate: rotate - 2 }}
       whileInView={{ opacity: 1, y: 0, rotate }}
       viewport={{ once: true, margin: "-80px" }}

@@ -10,12 +10,15 @@ import { Experience } from "@/components/portfolio/Experience";
 import { Projects } from "@/components/portfolio/Projects";
 import { Skills } from "@/components/portfolio/Skills";
 import { Contact } from "@/components/portfolio/Contact";
+import { useGlobalClickSound } from "@/hooks/use-click-sound";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
 function Index() {
+  useGlobalClickSound();
+
   return (
     <SmoothScroll>
       <main className="relative min-h-screen overflow-x-hidden bg-background">
