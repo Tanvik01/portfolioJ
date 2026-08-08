@@ -37,14 +37,36 @@ export function Hero() {
               </div>
 
               <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.7 }}
-                className="mt-3 font-display text-4xl leading-[1.08] md:text-5xl lg:text-6xl ink"
+                variants={{
+                  hidden: {},
+                  show: { transition: { delayChildren: 0.5, staggerChildren: 0.12 } },
+                }}
+                initial="hidden"
+                animate="show"
+                className="mt-3 flex flex-wrap items-baseline gap-x-3 font-display text-4xl leading-[1.08] md:text-5xl lg:text-6xl ink"
               >
-                Software should{" "}
-                <span className="italic font-hand text-5xl md:text-6xl lg:text-7xl">just </span>{" "}
-                work.
+                {[
+                  { text: "Software" },
+                  { text: "should" },
+                  { text: "just", hand: true },
+                  { text: "work." },
+                ].map((word) => (
+                  <motion.span
+                    key={word.text}
+                    variants={{
+                      hidden: { opacity: 0, y: 16, rotate: -3 },
+                      show: { opacity: 1, y: 0, rotate: 0 },
+                    }}
+                    transition={{ type: "spring", stiffness: 220, damping: 18 }}
+                    className={
+                      word.hand
+                        ? "inline-block italic font-hand text-5xl md:text-6xl lg:text-7xl"
+                        : "inline-block"
+                    }
+                  >
+                    {word.text}
+                  </motion.span>
+                ))}
               </motion.h1>
 
               <motion.p

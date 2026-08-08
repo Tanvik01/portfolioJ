@@ -31,8 +31,15 @@ export function Skills() {
               }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.03, type: "spring", stiffness: 200 }}
-              whileHover={{ scale: 1.08, rotate: 0, y: -4 }}
-              className="cursor-default rounded-lg border-2 border-ink/50 bg-paper px-4 py-2 font-hand text-xl ink shadow-[3px_3px_0_var(--ink)]"
+              whileHover={{
+                scale: 1.12,
+                rotate: 0,
+                y: -6,
+                boxShadow: "5px 6px 0 var(--ink)",
+                transition: { type: "spring", stiffness: 400, damping: 12 },
+              }}
+              whileTap={{ scale: 0.95, y: 0, boxShadow: "1px 1px 0 var(--ink)" }}
+              className="cursor-pointer select-none rounded-lg border-2 border-ink/50 bg-paper px-4 py-2 font-hand text-xl ink shadow-[3px_3px_0_var(--ink)]"
             >
               {s}
             </motion.span>
