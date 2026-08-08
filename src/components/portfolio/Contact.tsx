@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { MagneticButton } from "./MagneticButton";
 
 export function Contact() {
   return (
@@ -30,28 +31,28 @@ export function Contact() {
           transition={{ delay: 0.3 }}
           className="mt-12 flex flex-wrap items-center justify-center gap-4"
         >
-          <a
+          <MagneticButton
             href="mailto:hello@tanvi.dev"
             className="group relative inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 font-hand text-2xl text-paper transition-transform hover:-rotate-2 hover:scale-105"
           >
             say hi ✉
-          </a>
-          <a
+          </MagneticButton>
+          <MagneticButton
             href="https://github.com/Tanvik01"
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-full border-2 border-ink px-8 py-4 font-hand text-2xl ink transition-transform hover:rotate-2 hover:scale-105"
           >
             github ↗
-          </a>
-          <a
+          </MagneticButton>
+          <MagneticButton
             href="https://www.linkedin.com/in/tanvi-kokitkar01/"
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-full border-2 border-ink px-8 py-4 font-hand text-2xl ink transition-transform hover:-rotate-2 hover:scale-105"
           >
             linkedin ↗
-          </a>
+          </MagneticButton>
         </motion.div>
 
         <motion.p

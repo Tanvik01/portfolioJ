@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/portfolio/Nav";
 import { CursorDoodle } from "@/components/portfolio/CursorDoodle";
+import { SmoothScroll } from "@/components/portfolio/SmoothScroll";
+import { ScrollProgress } from "@/components/portfolio/ScrollProgress";
+import { SectionDivider } from "@/components/portfolio/SectionDivider";
 import { Hero } from "@/components/portfolio/Hero";
 import { Beliefs } from "@/components/portfolio/Beliefs";
 import { Experience } from "@/components/portfolio/Experience";
@@ -14,15 +17,22 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-background">
-      <CursorDoodle />
-      <Nav />
-      <Hero />
-      <Skills />
-      <Experience />
-      <Projects />
-      <Beliefs />
-      <Contact />
-    </main>
+    <SmoothScroll>
+      <main className="relative min-h-screen overflow-x-hidden bg-background">
+        <ScrollProgress />
+        <CursorDoodle />
+        <Nav />
+        <Hero />
+        <Skills />
+        <SectionDivider />
+        <Experience />
+        <SectionDivider flip />
+        <Projects />
+        <SectionDivider />
+        <Beliefs />
+        <SectionDivider flip />
+        <Contact />
+      </main>
+    </SmoothScroll>
   );
 }

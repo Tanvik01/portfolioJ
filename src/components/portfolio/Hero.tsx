@@ -1,11 +1,22 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import doodle from "@/assets/doodle.png";
 
 export function Hero() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const doodleY = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const doodleRotate = useTransform(scrollYProgress, [0, 1], [0, 8]);
+  const leftDoodleY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const rightDoodleY = useTransform(scrollYProgress, [0, 1], [0, 90]);
+
   return (
-    <section id="top" className="relative px-4 pt-24 pb-8 md:pt-28">
+    <section id="top" ref={ref} className="relative px-4 pt-24 pb-8 md:pt-28">
       {/* margin doodles */}
-      <MarginDoodles />
+      <MarginDoodles leftY={leftDoodleY} rightY={rightDoodleY} />
 
       <div className="mx-auto max-w-6xl">
         {/* Tape strips sit on the outer wrapper so they aren't clipped */}
@@ -78,6 +89,7 @@ export function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.9 }}
+              style={{ y: doodleY, rotate: doodleRotate }}
               className="relative flex items-center justify-center p-4 md:p-6"
             >
               <img
@@ -94,34 +106,39 @@ export function Hero() {
   );
 }
 
-function ScrollHint() {
-  return (
-    <motion.div
-      animate={{ y: [0, 8, 0] }}
-      transition={{ duration: 2, repeat: Infinity }}
-      className="mt-10 flex flex-col items-center gap-1 font-hand text-lg ink/70"
-    >
-      <span>scroll ↓</span>
-      <svg width="18" height="30" viewBox="0 0 18 30" fill="none">
-        <path d="M9 2 L9 26 M4 21 L9 27 L14 21" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.6" />
-      </svg>
-    </motion.div>
-  );
-}
-
-function MarginDoodles() {
+function MarginDoodles({
+  leftY,
+  rightY,
+}: {
+  leftY: import("framer-motion").MotionValue<number>;
+  rightY: import("framer-motion").MotionValue<number>;
+}) {
   return (
     <>
-      <svg className="pointer-events-none absolute left-4 top-40 hidden lg:block" width="60" height="90" viewBox="0 0 60 90" fill="none">
+      <motion.svg
+        style={{ y: leftY }}
+        className="pointer-events-none absolute left-4 top-40 hidden lg:block"
+        width="60"
+        height="90"
+        viewBox="0 0 60 90"
+        fill="none"
+      >
         <path d="M10 20 Q 5 40, 15 55 Q 25 70, 20 85" stroke="var(--ink)" strokeWidth="1.4" fill="none" strokeLinecap="round" opacity="0.6" />
         <circle cx="15" cy="15" r="4" stroke="var(--ink)" strokeWidth="1.4" fill="none" opacity="0.6" />
         <path d="M35 30 L45 40 M45 30 L35 40" stroke="var(--ink)" strokeWidth="1.4" strokeLinecap="round" opacity="0.6" />
-      </svg>
-      <svg className="pointer-events-none absolute right-4 top-64 hidden lg:block" width="80" height="120" viewBox="0 0 80 120" fill="none">
+      </motion.svg>
+      <motion.svg
+        style={{ y: rightY }}
+        className="pointer-events-none absolute right-4 top-64 hidden lg:block"
+        width="80"
+        height="120"
+        viewBox="0 0 80 120"
+        fill="none"
+      >
         <path d="M20 10 Q 40 30, 30 60 Q 20 90, 40 110" stroke="var(--ink)" strokeWidth="1.4" fill="none" strokeLinecap="round" opacity="0.5" />
         <path d="M55 40 L65 40 M60 35 L60 45" stroke="var(--ink)" strokeWidth="1.4" strokeLinecap="round" opacity="0.6" />
         <path d="M10 80 Q 20 75, 25 85" stroke="var(--ink)" strokeWidth="1.4" fill="none" strokeLinecap="round" opacity="0.6" />
-      </svg>
+      </motion.svg>
     </>
   );
 }
