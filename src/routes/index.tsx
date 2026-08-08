@@ -9,6 +9,7 @@ import { Beliefs } from "@/components/portfolio/Beliefs";
 import { Experience } from "@/components/portfolio/Experience";
 import { Projects } from "@/components/portfolio/Projects";
 import { Skills } from "@/components/portfolio/Skills";
+import { NowPlaying } from "@/components/portfolio/NowPlaying";
 import { Contact } from "@/components/portfolio/Contact";
 import { useGlobalClickSound } from "@/hooks/use-click-sound";
 
@@ -26,6 +27,7 @@ function Index() {
         <CursorDoodle />
         <Nav />
         <Hero />
+        <NowPlaying />
         <Skills />
         <SectionDivider />
         <Experience />
