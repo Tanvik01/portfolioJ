@@ -23,7 +23,7 @@ export function Hero() {
         <div className="relative">
           <div className="absolute -top-3 left-16 z-10 h-6 w-24 -rotate-6 tape rounded-sm shadow-md" />
           <div className="absolute -top-3 right-20 z-10 h-6 w-28 rotate-3 tape rounded-sm shadow-md" />
-        <div className="relative bg-paper text-paper-foreground sketch-border paper-grid shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)]">
+        <div className="relative bg-paper text-paper-foreground sketch-border paper-grid shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] overflow-hidden">
 
           <div className="grid md:grid-cols-2 min-h-[360px]">
             {/* Left: text */}
@@ -89,7 +89,6 @@ export function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.9 }}
-              style={{ y: doodleY, rotate: doodleRotate }}
               className="relative flex items-center justify-center p-4 md:p-6"
             >
               <img
