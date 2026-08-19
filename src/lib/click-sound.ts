@@ -14,13 +14,51 @@ function getCtx(): AudioContext | null {
   return ctx;
 }
 
-type ClickKind = "tick" | "card";
+type ClickKind = "tick" | "card" | "switch";
 
 export function playClick(kind: ClickKind = "tick") {
   const ac = getCtx();
   if (!ac) return;
 
   const now = ac.currentTime;
+
+  if (kind === "switch") {
+    // Metallic "clink" of a pull-chain switch
+    const osc = ac.createOscillator();
+    const gain = ac.createGain();
+    const filter = ac.createBiquadFilter();
+
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(1400, now);
+    osc.frequency.exponentialRampToValueAtTime(600, now + 0.06);
+
+    filter.type = "bandpass";
+    filter.frequency.value = 1000;
+    filter.Q.value = 2;
+
+    gain.gain.setValueAtTime(0.15, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(ac.destination);
+    osc.start(now);
+    osc.stop(now + 0.12);
+
+    // Second harmonic for metallic character
+    const osc2 = ac.createOscillator();
+    const gain2 = ac.createGain();
+    osc2.type = "sine";
+    osc2.frequency.setValueAtTime(2100, now);
+    osc2.frequency.exponentialRampToValueAtTime(900, now + 0.04);
+    gain2.gain.setValueAtTime(0.06, now);
+    gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+    osc2.connect(gain2);
+    gain2.connect(ac.destination);
+    osc2.start(now);
+    osc2.stop(now + 0.08);
+    return;
+  }
 
   if (kind === "card") {
     // Deeper, softer "pencil tap" — two layered oscillators + a short noise burst

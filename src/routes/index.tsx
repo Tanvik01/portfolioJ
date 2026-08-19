@@ -10,6 +10,7 @@ import { Experience } from "@/components/portfolio/Experience";
 import { Projects } from "@/components/portfolio/Projects";
 import { Skills } from "@/components/portfolio/Skills";
 import { NowPlaying } from "@/components/portfolio/NowPlaying";
+import { LampToggle } from "@/components/portfolio/LampToggle";
 import { Contact } from "@/components/portfolio/Contact";
 import { useGlobalClickSound } from "@/hooks/use-click-sound";
 
@@ -24,6 +25,7 @@ function Index() {
     <SmoothScroll>
       <main className="relative min-h-screen overflow-x-hidden bg-background">
         <ScrollProgress />
+        <LampToggle />
         <CursorDoodle />
         <Nav />
         <Hero />

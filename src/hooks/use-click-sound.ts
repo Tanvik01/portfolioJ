@@ -6,6 +6,8 @@ export function useGlobalClickSound() {
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       if (!target) return;
+      // The lamp toggle handles its own sound
+      if (target.closest("[data-click-sound='lamp']")) return;
       // Cards (and anything inside them) get the deeper "pencil tap"
       if (target.closest("[data-click-sound='card']")) {
         playClick("card");
