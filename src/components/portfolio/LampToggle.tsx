@@ -1,194 +1,122 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { playClick } from "@/lib/click-sound";
 
 export function LampToggle() {
-  const [on, setOn] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [pullY, setPullY] = useState(0);
-  const chainRef = useRef<HTMLButtonElement>(null);
-  const firstRender = useRef(true);
 
   const toggle = () => {
     playClick("switch");
-    setOn((v) => !v);
-    // Animate the pull chain
-    setPullY(12);
-    setTimeout(() => setPullY(0), 180);
+    setIsOpen((value) => !value);
+    setPullY(10);
+    window.setTimeout(() => setPullY(0), 180);
   };
-
-  // Respect saved preference
-  useEffect(() => {
-    const saved = localStorage.getItem("lamp");
-    if (saved === "off") {
-      setOn(false);
-    }
-    // Mark first render done after a tick so the overlay fades in
-    const t = setTimeout(() => (firstRender.current = false), 50);
-    return () => clearTimeout(t);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("lamp", on ? "on" : "off");
-  }, [on]);
 
   return (
     <>
-      {/* Darkness overlay — covers everything except the lamp area */}
       <AnimatePresence>
-        {!on && (
+        {!isOpen && (
           <motion.div
-            initial={{ opacity: firstRender.current ? 1 : 0 }}
+            initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="fixed inset-0 z-[55] pointer-events-none"
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="pointer-events-none fixed inset-0 z-[55]"
             style={{
               background:
-                "radial-gradient(circle 280px at 50% 80px, transparent 0%, rgba(8,6,4,0.5) 55%, rgba(8,6,4,0.97) 85%)",
+                "radial-gradient(ellipse 300px 360px at calc(100% - 105px) 145px, transparent 0%, rgba(8,6,4,0.4) 48%, rgba(8,6,4,0.96) 82%)",
             }}
           />
         )}
       </AnimatePresence>
 
-      {/* Warm glow when on */}
       <AnimatePresence>
-        {on && (
+        {isOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="fixed inset-0 z-[35] pointer-events-none"
+            transition={{ duration: 0.8 }}
+            className="pointer-events-none fixed inset-0 z-[35]"
             style={{
               background:
-                "radial-gradient(ellipse 600px 500px at 50% 120px, rgba(255,210,140,0.07) 0%, transparent 70%)",
+                "radial-gradient(ellipse 620px 520px at calc(100% - 115px) 155px, rgba(255,210,140,0.08) 0%, transparent 72%)",
             }}
           />
         )}
       </AnimatePresence>
 
-      {/* The lamp — fixed at top center */}
-      <div className="fixed left-1/2 top-0 z-[58] -translate-x-1/2 pointer-events-none">
+      <div className="fixed right-2 top-0 z-[58] w-[190px] pointer-events-none sm:right-8 lg:right-16">
         <svg
-          width="160"
-          height="140"
-          viewBox="0 0 160 140"
+          width="190"
+          height="190"
+          viewBox="0 0 190 190"
           fill="none"
-          className="pointer-events-none"
+          className="pointer-events-none ml-auto"
           aria-hidden
         >
-          {/* Ceiling mount */}
-          <line
-            x1="80"
-            y1="0"
-            x2="80"
-            y2="6"
-            stroke="var(--ink)"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          />
-          {/* Small mounting plate */}
+          <line x1="142" y1="0" x2="142" y2="7" stroke="var(--ink)" strokeWidth="2.5" strokeLinecap="round" />
           <path
-            d="M72 6 Q 80 2, 88 6 L 88 10 Q 80 12, 72 10 Z"
+            d="M132 7 Q 142 3, 152 7 L 152 12 Q 142 14, 132 12 Z"
             stroke="var(--ink)"
             strokeWidth="1.5"
             fill="var(--paper)"
             strokeLinejoin="round"
           />
-          {/* Hanging cord — two slightly wavy lines for hand-drawn feel */}
           <path
-            d="M80 11 Q 78 25, 80 40 Q 82 52, 80 64"
+            d="M142 12 Q 139 31, 142 48 Q 145 66, 141 84 Q 139 96, 142 108"
             stroke="var(--ink)"
             strokeWidth="1.8"
             fill="none"
             strokeLinecap="round"
           />
-          {/* Lamp shade — trapezoid with hand-drawn wobble */}
           <path
-            d="M48 66 Q 50 64, 52 65 L 108 65 Q 112 64, 114 66 L 122 98 Q 123 100, 120 102 L 42 102 Q 38 100, 40 98 Z"
+            d="M129 103 Q 142 100, 155 103 L 155 119 Q 142 123, 129 119 Z"
             stroke="var(--ink)"
             strokeWidth="2"
-            fill={on ? "var(--ink)" : "var(--paper)"}
+            fill="var(--paper)"
             strokeLinejoin="round"
           />
-          {/* Shade inner line for depth */}
+          <path d="M131 107 Q 142 110, 153 107 M131 113 Q 142 116, 153 113" stroke="var(--ink)" strokeWidth="1.2" strokeLinecap="round" />
+          <circle cx="142" cy="151" r="35" fill="rgba(255,190,70,0.18)" />
           <path
-            d="M54 68 Q 56 67, 58 68 L 104 68 Q 106 67, 108 68"
-            stroke={on ? "rgba(255,210,140,0.4)" : "var(--ink)"}
-            strokeWidth="1"
-            fill="none"
-            strokeLinecap="round"
-            opacity="0.6"
+            d="M134 119 Q 142 116, 150 119 L 150 128 Q 158 135, 157 146 Q 155 161, 142 167 Q 129 161, 127 146 Q 126 135, 134 128 Z"
+            stroke="var(--ink)"
+            strokeWidth="1.7"
+            fill="rgba(255,211,92,0.95)"
+            strokeLinejoin="round"
           />
-          {/* Light bulb — glows when on */}
-          <AnimatePresence>
-            {on && (
-              <motion.g
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.3 }}
-                style={{ transformOrigin: "80px 120px" }}
-              >
-                {/* Bulb glow */}
-                <circle
-                  cx="80"
-                  cy="118"
-                  r="22"
-                  fill="rgba(255,210,140,0.25)"
-                />
-                {/* Bulb body */}
-                <path
-                  d="M74 104 Q 80 102, 86 104 L 86 112 Q 90 114, 90 120 Q 90 126, 80 127 Q 70 126, 70 120 Q 70 114, 74 112 Z"
-                  stroke="var(--ink)"
-                  strokeWidth="1.5"
-                  fill="rgba(255,225,160,0.85)"
-                  strokeLinejoin="round"
-                />
-                {/* Bulb base */}
-                <line x1="75" y1="127" x2="85" y2="127" stroke="var(--ink)" strokeWidth="1.2" strokeLinecap="round" />
-                <line x1="77" y1="130" x2="83" y2="130" stroke="var(--ink)" strokeWidth="1.2" strokeLinecap="round" />
-              </motion.g>
-            )}
-          </AnimatePresence>
-          {/* When off, show a faint dark bulb outline */}
-          {!on && (
-            <path
-              d="M74 104 Q 80 102, 86 104 L 86 112 Q 90 114, 90 120 Q 90 126, 80 127 Q 70 126, 70 120 Q 70 114, 74 112 Z"
-              stroke="var(--ink)"
-              strokeWidth="1.2"
-              fill="none"
-              strokeLinejoin="round"
-              opacity="0.4"
-            />
-          )}
+          <path d="M133 132 Q 142 127, 151 132 M129 142 Q 142 136, 155 142 M130 152 Q 142 147, 154 152" stroke="rgba(255,255,220,0.72)" strokeWidth="1.2" fill="none" strokeLinecap="round" />
+          <path d="M135 166 Q 142 170, 149 166" stroke="var(--ink)" strokeWidth="1.4" strokeLinecap="round" />
+          <path d="M136 171 Q 142 174, 148 171" stroke="var(--ink)" strokeWidth="1.4" strokeLinecap="round" />
         </svg>
 
-        {/* Pull chain — clickable */}
+        {!isOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: 12 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="absolute right-[112px] top-[154px] w-[92px] rotate-[-7deg] text-right"
+          >
+            <p className="font-hand text-2xl leading-none ink">click me</p>
+            <svg width="88" height="32" viewBox="0 0 88 32" fill="none" className="ml-auto mt-1">
+              <path d="M4 7 Q 33 3, 70 17 Q 78 20, 84 16" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" />
+              <path d="M75 11 L 84 16 L 75 20" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </motion.div>
+        )}
+
         <motion.button
-          ref={chainRef}
           onClick={toggle}
           animate={{ y: pullY }}
           transition={{ type: "spring", stiffness: 500, damping: 12 }}
-          className="pointer-events-auto absolute left-1/2 top-[128px] -translate-x-1/2 cursor-pointer"
+          className="pointer-events-auto absolute left-[116px] top-[108px] h-[70px] w-[52px] cursor-pointer rounded-full"
           data-click-sound="lamp"
-          aria-label={on ? "Turn lamp off" : "Turn lamp on"}
-          title={on ? "Click to turn off" : "Click to turn on"}
+          aria-label={isOpen ? "Turn the lamp off" : "Turn the lamp on"}
+          title={isOpen ? "Turn the lamp off" : "Turn the lamp on"}
         >
-          {/* Chain links */}
-          <svg width="16" height="22" viewBox="0 0 16 22" fill="none">
-            <ellipse cx="8" cy="5" rx="3" ry="4" stroke="var(--ink)" strokeWidth="1.3" fill="none" />
-            <ellipse cx="8" cy="11" rx="3" ry="4" stroke="var(--ink)" strokeWidth="1.3" fill="none" />
-            <ellipse cx="8" cy="17" rx="3" ry="4" stroke="var(--ink)" strokeWidth="1.3" fill="none" />
-          </svg>
-          {/* Pull knob */}
-          <circle
-            cx="8"
-            cy="21"
-            r="4"
-            fill="var(--ink)"
-            className="drop-shadow"
-          />
+          <span className="sr-only">Turn the lamp {isOpen ? "off" : "on"}</span>
         </motion.button>
       </div>
     </>
