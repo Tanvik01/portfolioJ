@@ -33,7 +33,7 @@ export function Hero() {
                   transition={{ delay: 0.2 }}
                   className="font-hand text-3xl md:text-4xl ink font-bold inline-block"
                 >
-                  im tanvi. i can do backend, but frontend is where i actually have fun.
+                  im tanvi. i can do backend, but frontend is where i actually have fun because,
                 </motion.p>
 
                 <motion.h1
