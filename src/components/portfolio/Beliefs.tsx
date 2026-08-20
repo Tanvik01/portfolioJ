@@ -39,6 +39,8 @@ export function Beliefs() {
               rotate={i === 0 ? -2 : i === 2 ? 2 : 0.5}
               tape={i % 2 === 0 ? "top-left" : "top-right"}
               className="p-8"
+              dropIn
+              dropDelay={i * 0.25}
             >
               <div className="font-hand text-5xl ink/40">{b.n}</div>
               <h3 className="mt-2 font-display text-2xl ink">{b.title}</h3>

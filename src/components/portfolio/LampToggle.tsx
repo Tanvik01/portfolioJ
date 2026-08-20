@@ -1,22 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { PullCord } from "pullcord";
+import "pullcord/pullcord.css";
 import { playClick } from "@/lib/click-sound";
 
 export function LampToggle() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [pullY, setPullY] = useState(0);
+  // isOn = lamp is lit (light mode feel); starts false (dark / lamp off)
+  const [isOn, setIsOn] = useState(false);
 
-  const toggle = () => {
+  // Keep <html> .dark class in sync — dark when lamp is off
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", !isOn);
+  }, [isOn]);
+
+  const handlePull = () => {
     playClick("switch");
-    setIsOpen((value) => !value);
-    setPullY(10);
-    window.setTimeout(() => setPullY(0), 180);
+    setIsOn((prev) => !prev);
   };
 
   return (
     <>
+      {/* Dark vignette overlay — visible when lamp is OFF */}
       <AnimatePresence>
-        {!isOpen && (
+        {!isOn && (
           <motion.div
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
@@ -31,8 +37,9 @@ export function LampToggle() {
         )}
       </AnimatePresence>
 
+      {/* Warm glow overlay — visible when lamp is ON */}
       <AnimatePresence>
-        {isOpen && (
+        {isOn && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -47,77 +54,73 @@ export function LampToggle() {
         )}
       </AnimatePresence>
 
-      <div className="fixed right-2 top-0 z-[58] w-[190px] pointer-events-none sm:right-8 lg:right-16">
-        <svg
-          width="190"
-          height="190"
-          viewBox="0 0 190 190"
-          fill="none"
-          className="pointer-events-none ml-auto"
-          aria-hidden
-        >
-          <line x1="142" y1="0" x2="142" y2="7" stroke="var(--ink)" strokeWidth="2.5" strokeLinecap="round" />
-          <path
-            d="M132 7 Q 142 3, 152 7 L 152 12 Q 142 14, 132 12 Z"
-            stroke="var(--ink)"
-            strokeWidth="1.5"
-            fill="var(--paper)"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M142 12 Q 139 31, 142 48 Q 145 66, 141 84 Q 139 96, 142 108"
-            stroke="var(--ink)"
-            strokeWidth="1.8"
-            fill="none"
-            strokeLinecap="round"
-          />
-          <path
-            d="M129 103 Q 142 100, 155 103 L 155 119 Q 142 123, 129 119 Z"
-            stroke="var(--ink)"
-            strokeWidth="2"
-            fill="var(--paper)"
-            strokeLinejoin="round"
-          />
-          <path d="M131 107 Q 142 110, 153 107 M131 113 Q 142 116, 153 113" stroke="var(--ink)" strokeWidth="1.2" strokeLinecap="round" />
-          <circle cx="142" cy="151" r="35" fill="rgba(255,190,70,0.18)" />
-          <path
-            d="M134 119 Q 142 116, 150 119 L 150 128 Q 158 135, 157 146 Q 155 161, 142 167 Q 129 161, 127 146 Q 126 135, 134 128 Z"
-            stroke="var(--ink)"
-            strokeWidth="1.7"
-            fill="rgba(255,211,92,0.95)"
-            strokeLinejoin="round"
-          />
-          <path d="M133 132 Q 142 127, 151 132 M129 142 Q 142 136, 155 142 M130 152 Q 142 147, 154 152" stroke="rgba(255,255,220,0.72)" strokeWidth="1.2" fill="none" strokeLinecap="round" />
-          <path d="M135 166 Q 142 170, 149 166" stroke="var(--ink)" strokeWidth="1.4" strokeLinecap="round" />
-          <path d="M136 171 Q 142 174, 148 171" stroke="var(--ink)" strokeWidth="1.4" strokeLinecap="round" />
-        </svg>
-
-        {!isOpen && (
+      {/* "Pull the cord" hint — visible while lamp is off */}
+      <AnimatePresence>
+        {!isOn && (
           <motion.div
-            initial={{ opacity: 0, x: 12 }}
+            initial={{ opacity: 0, x: 16 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="absolute right-[112px] top-[154px] w-[92px] rotate-[-7deg] text-right"
+            exit={{ opacity: 0, x: 16 }}
+            transition={{ delay: 0.9, duration: 0.5 }}
+            className="pointer-events-none fixed z-[60]"
+            style={{ right: "calc(7rem + 56px)", top: "160px" }}
           >
-            <p className="font-hand text-2xl leading-none ink">click me</p>
-            <svg width="88" height="32" viewBox="0 0 88 32" fill="none" className="ml-auto mt-1">
-              <path d="M4 7 Q 33 3, 70 17 Q 78 20, 84 16" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" />
-              <path d="M75 11 L 84 16 L 75 20" stroke="var(--ink)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            {/* Label */}
+            <p
+              className="font-hand text-xl leading-tight whitespace-nowrap text-right"
+              style={{
+                color: "var(--foreground)",
+                textShadow: "0 1px 6px rgba(0,0,0,0.6)",
+              }}
+            >
+              pull the cord
+            </p>
+
+            {/* Curved arrow pointing right toward the cord */}
+            <div className="flex justify-end mt-1">
+              <motion.svg
+                width="52"
+                height="36"
+                viewBox="0 0 52 36"
+                fill="none"
+                animate={{ x: [0, 4, 0] }}
+                transition={{ duration: 1.1, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <path
+                  d="M4 28 Q 18 32, 30 20 Q 40 10, 46 14"
+                  stroke="var(--foreground)"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  fill="none"
+                />
+                <path
+                  d="M40 9 L 46 14 L 39 17"
+                  stroke="var(--foreground)"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </motion.svg>
+            </div>
           </motion.div>
         )}
+      </AnimatePresence>
 
-        <motion.button
-          onClick={toggle}
-          animate={{ y: pullY }}
-          transition={{ type: "spring", stiffness: 500, damping: 12 }}
-          className="pointer-events-auto absolute left-[116px] top-[108px] h-[70px] w-[52px] cursor-pointer rounded-full"
-          data-click-sound="lamp"
-          aria-label={isOpen ? "Turn the lamp off" : "Turn the lamp on"}
-          title={isOpen ? "Turn the lamp off" : "Turn the lamp on"}
-        >
-          <span className="sr-only">Turn the lamp {isOpen ? "off" : "on"}</span>
-        </motion.button>
+      {/* PullCord — CSS vars set via wrapper so the knob lands at top-right */}
+      <div
+        style={
+          {
+            "--pullcord-top": "0px",
+            "--pullcord-right": "7rem",
+            "--pullcord-z": "59",
+          } as React.CSSProperties
+        }
+      >
+        <PullCord
+          onPull={handlePull}
+          pulled={isOn}
+          ariaLabel="Toggle lamp"
+        />
       </div>
     </>
   );

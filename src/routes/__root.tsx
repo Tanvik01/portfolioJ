@@ -24,8 +24,8 @@ function NotFoundComponent() {
         </p>
         <div className="mt-6">
           <Link
-              to="/"
-              className="inline-flex items-center justify-center rounded-md bg-paper px-4 py-2 text-sm font-note text-paper-foreground transition-transform hover:-rotate-1"
+            to="/"
+            className="inline-flex items-center justify-center rounded-md bg-paper px-4 py-2 text-sm font-note text-paper-foreground transition-transform hover:-rotate-1"
           >
             ← go home
           </Link>
@@ -49,11 +49,11 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         <p className="mt-2 text-sm text-muted-foreground">Something went wrong. Try refreshing.</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
-              onClick={() => {
-                router.invalidate();
-                reset();
-              }}
-              className="rounded-md bg-paper px-4 py-2 text-sm text-paper-foreground font-note"
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
+            className="rounded-md bg-paper px-4 py-2 text-sm text-paper-foreground font-note"
           >
             Try again
           </button>
@@ -69,17 +69,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Tanvi ~ Full stack developer" },
+      { title: "Tanvi's Portfolio" },
       { name: "description", content: "Sketchbook portfolio of Tanvi — CS grad '26, full stack developer. Projects, work experience, and things I strongly believe in." },
       { name: "author", content: "Tanvi" },
-      { property: "og:title", content: "Tanvi ~ Full stack developer" },
+      { property: "og:title", content: "Tanvi's Portfolio" },
       { property: "og:description", content: "Software should just work. Explore Tanvi's projects, experience, and doodles." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/assets/img.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

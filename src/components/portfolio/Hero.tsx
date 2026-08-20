@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import doodle from "@/assets/doodle.png";
+import meImg from "@/assets/me.jpeg";
+import wowImg from "@/assets/wow.png";
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -8,8 +9,6 @@ export function Hero() {
     target: ref,
     offset: ["start start", "end start"],
   });
-  const doodleY = useTransform(scrollYProgress, [0, 1], [0, 120]);
-  const doodleRotate = useTransform(scrollYProgress, [0, 1], [0, 8]);
   const leftDoodleY = useTransform(scrollYProgress, [0, 1], [0, -60]);
   const rightDoodleY = useTransform(scrollYProgress, [0, 1], [0, 90]);
 
@@ -23,82 +22,91 @@ export function Hero() {
         <div className="relative">
           <div className="absolute -top-3 left-16 z-10 h-6 w-24 -rotate-6 tape rounded-sm shadow-md" />
           <div className="absolute -top-3 right-20 z-10 h-6 w-28 rotate-3 tape rounded-sm shadow-md" />
-        <div className="relative bg-paper text-paper-foreground sketch-border paper-grid shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] overflow-hidden">
+          <div className="relative bg-paper text-paper-foreground sketch-border paper-grid shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)] overflow-hidden">
 
-          <div className="grid md:grid-cols-2 min-h-[360px]">
-            {/* Left: text */}
-            <div className="p-8 md:p-12 flex flex-col justify-center">
-              <div className="flex items-baseline gap-3 flex-wrap">
+            <div className="grid md:grid-cols-2 min-h-[360px]">
+              {/* Left: text */}
+              <div className="p-8 md:p-12 flex flex-col justify-center">
                 <motion.p
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="font-hand text-2xl ink"
+                  className="font-hand text-3xl md:text-4xl ink font-bold inline-block"
                 >
-                  Tanvi ~
+                  im tanvi. i can do backend, but frontend is where i actually have fun.
                 </motion.p>
+
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.7 }}
+                  className="mt-3 font-display text-5xl leading-[1.08] md:text-6xl lg:text-7xl ink"
+                >
+                  The interface{" "}
+                  <span className="italic font-hand text-6xl md:text-7xl lg:text-8xl">is </span>{" "}
+                  the product.
+                </motion.h1>
+
                 <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 0.35 }}
-                  className="font-note text-base ink/70"
+                  transition={{ delay: 0.75 }}
+                  className="mt-4 max-w-xl font-hand text-xl md:text-2xl leading-relaxed ink/90"
                 >
-                  Full stack developer
+                  CS grad '26. Built real stuff at a couple{" "}
+                  <span className="relative inline-block ink font-semibold px-1.5">
+                    <svg className="pointer-events-none absolute inset-0 h-full w-full -z-0" viewBox="0 0 120 40" preserveAspectRatio="none" fill="none" aria-hidden="true">
+                      <path d="M8 22 Q 20 4, 60 6 Q 108 8, 112 20 Q 116 34, 60 34 Q 10 34, 8 22" stroke="var(--ink)" strokeWidth="2" fill="none" strokeLinecap="round" />
+                    </svg>
+                    <span className="relative">startups</span>
+                  </span>
+                  , won a <span className="hand-underline ink font-semibold">hackathon</span> I'm still proud of, lose most evenings to cats and whatever show everyone's talking about.
+                </motion.p>
+
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1 }}
+                  className="mt-3 font-note text-base md:text-lg ink/60"
+                >
+                  Bengaluru • GMT +5:30
                 </motion.p>
               </div>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.7 }}
-                className="mt-3 font-display text-4xl leading-[1.08] md:text-5xl lg:text-6xl ink"
+              {/* Right: photo with rounded border and wow doodle */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+                className="relative flex items-center justify-center p-6 md:p-10"
               >
-                Software should{" "}
-                <span className="italic font-hand text-5xl md:text-6xl lg:text-7xl">just </span>{" "}
-                work.
-              </motion.h1>
+                <div className="relative max-w-[280px] sm:max-w-[320px] w-full">
+                  <div className="relative overflow-hidden rounded-2xl border-2 border-ink/40 shadow-[4px_4px_0_var(--ink)] rotate-1 hover:rotate-0 transition-transform duration-300">
+                    <img
+                      src={meImg}
+                      alt="Tanvi"
+                      className="w-full h-auto object-cover aspect-[4/5]"
+                    />
 
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.75 }}
-                className="mt-4 max-w-lg font-hand text-lg leading-relaxed ink/90"
-              >
-                CS grad '26. Previously built full-fledged software products at{" "}
-                <span className="relative inline-block ink font-semibold px-1.5">
-                  <svg className="pointer-events-none absolute inset-0 h-full w-full -z-0" viewBox="0 0 120 40" preserveAspectRatio="none" fill="none" aria-hidden="true">
-                    <path d="M8 22 Q 20 4, 60 6 Q 108 8, 112 20 Q 116 34, 60 34 Q 10 34, 8 22" stroke="var(--ink)" strokeWidth="2" fill="none" strokeLinecap="round" />
-                  </svg>
-                  <span className="relative">startups</span>
-                </span>
-                , won <span className="hand-underline ink font-semibold">hackathons</span> for social good, and love binge watching shows and cats.
-              </motion.p>
-
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1 }}
-                className="mt-3 font-note text-sm ink/60"
-              >
-                Bengaluru • GMT +5:30
-              </motion.p>
+                    {/* wow.png sparkle/arrows graphic anchored at 52% left, 62% top from bottom-left point */}
+                    <div
+                      className="absolute z-20 pointer-events-none select-none w-12 sm:w-14"
+                      style={{ left: "47%", top: "62%", transform: "translate(0, -100%) rotate(-5deg)" }}
+                    >
+                      <motion.img
+                        src={wowImg}
+                        alt="wow doodle"
+                        initial={{ opacity: 0, scale: 0, rotate: 5 }}
+                        animate={{ opacity: 1, scale: 1, rotate: 16 }}
+                        transition={{ delay: 0.7, type: "spring", stiffness: 350, damping: 18 }}
+                        className="w-full h-auto drop-shadow-md origin-bottom-left"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
-
-            {/* Right: doodle — fills entire right half */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.9 }}
-              className="relative flex items-center justify-center p-4 md:p-6"
-            >
-              <img
-                src={doodle}
-                alt="A hand-drawn doodle"
-                className="w-full h-full object-contain"
-              />
-            </motion.div>
           </div>
-        </div>
         </div>
       </div>
     </section>

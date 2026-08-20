@@ -136,3 +136,10 @@
     cursor: none !important;
   }
 }
+
+/* Never show focus ring on SVG buttons (bulb etc.) */
+svg[role="button"]:focus,
+svg[role="button"]:focus-visible {
+  outline: none !important;
+}
+
