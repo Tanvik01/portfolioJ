@@ -9,9 +9,10 @@ interface Project {
   title: string
   description: string
   year: string
-  live: string
-  github: string
+  live?: string
+  github?: string
   image?: string
+  video?: string
 }
 
 const allProjects: Project[] = [
@@ -21,7 +22,14 @@ const allProjects: Project[] = [
     year: "2026",
     live: "https://refactor-plus.vercel.app/",
     github: "https://github.com/Tanvik01/RefactorPlus",
-    image: "/assets/refactor.png",
+    video: "/assets/refactor.mp4",
+  },
+  {
+    title: "Golden Hour",
+    description: "A real-time WebGL ocean built with React Three Fiber — height-field water simulation, underwater caustics, and a full sunset-to-seabed dive with fish schools and seagulls.",
+    year: "2026",
+    live: "https://ocean-sunset.vercel.app/",
+    video: "/assets/ocean.mp4",
   },
   {
     title: "DripCheck",
@@ -29,7 +37,7 @@ const allProjects: Project[] = [
     year: "2025",
     live: "https://drip-check-ten.vercel.app/",
     github: "https://github.com/Tanvik01/DripCheck",
-    image: "/assets/drip.png",
+    video: "/assets/drip.mp4",
   },
   {
     title: "Talk-to-DB",
@@ -119,7 +127,7 @@ export function ProjectShowcase() {
 
   const handleMouseEnter = (index: number) => {
     setHoveredIndex(index)
-    setIsVisible(allProjects[index]?.image != null)
+    setIsVisible(allProjects[index]?.video != null || allProjects[index]?.image != null)
   }
 
   const handleMouseLeave = () => {
@@ -133,38 +141,67 @@ export function ProjectShowcase() {
       onMouseMove={handleMouseMove}
       className="relative w-full px-4 sm:px-6 py-16"
     >
-      {/* Floating image preview */}
+      {/* Floating video / image preview */}
       <div
-        className="pointer-events-none fixed z-[9000] overflow-hidden rounded-2xl shadow-2xl"
+        className="pointer-events-none fixed z-[9000] overflow-hidden rounded-2xl shadow-2xl border border-ink/15 bg-paper"
         style={{
           left: containerRect ? containerRect.left : 0,
           top: containerRect ? containerRect.top : 0,
-          transform: `translate3d(${smoothPosition.x + 24}px, ${smoothPosition.y - 110}px, 0)`,
+          transform: `translate3d(${smoothPosition.x + 24}px, ${smoothPosition.y - 100}px, 0)`,
           opacity: isVisible ? 1 : 0,
           scale: isVisible ? "1" : "0.88",
           transition: "opacity 0.25s cubic-bezier(0.4,0,0.2,1), scale 0.25s cubic-bezier(0.4,0,0.2,1)",
-          width: 280,
+          width: 320,
           height: 180,
         }}
       >
-        <div className="relative w-full h-full bg-paper overflow-hidden rounded-2xl">
-          {allProjects.filter(p => p.image).map((project) => {
-            const globalIdx = allProjects.indexOf(project)
-            return (
-              <img
-                key={project.title}
-                src={project.image}
-                alt={project.title}
-                className="absolute inset-0 w-full h-full object-cover object-top transition-all duration-500 ease-out"
-                style={{
-                  opacity: hoveredIndex === globalIdx ? 1 : 0,
-                  transform: hoveredIndex === globalIdx ? "scale(1)" : "scale(1.08)",
-                  filter: hoveredIndex === globalIdx ? "none" : "blur(8px)",
-                }}
-              />
-            )
-          })}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+        <div className="relative w-full h-full bg-paper overflow-hidden rounded-2xl flex items-center justify-center">
+          {allProjects
+            .filter((p) => p.video || p.image)
+            .map((project) => {
+              const globalIdx = allProjects.indexOf(project)
+              const isCurrent = hoveredIndex === globalIdx
+
+              if (project.video) {
+                return (
+                  <video
+                    key={project.title}
+                    src={project.video}
+                    poster={project.image}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    className="absolute inset-0 w-full h-full object-contain object-center transition-all duration-500 ease-out"
+                    style={{
+                      opacity: isCurrent ? 1 : 0,
+                      transform: isCurrent ? "scale(1)" : "scale(1.04)",
+                      filter: isCurrent ? "none" : "blur(8px)",
+                    }}
+                    ref={(el) => {
+                      if (el && isCurrent && el.paused) {
+                        el.play().catch(() => {})
+                      }
+                    }}
+                  />
+                )
+              }
+
+              return (
+                <img
+                  key={project.title}
+                  src={project.image}
+                  alt={project.title}
+                  className="absolute inset-0 w-full h-full object-contain object-center transition-all duration-500 ease-out"
+                  style={{
+                    opacity: isCurrent ? 1 : 0,
+                    transform: isCurrent ? "scale(1)" : "scale(1.04)",
+                    filter: isCurrent ? "none" : "blur(8px)",
+                  }}
+                />
+              )
+            })}
         </div>
       </div>
 
@@ -231,22 +268,26 @@ export function ProjectShowcase() {
                     className="flex gap-4 mt-2 transition-all duration-300"
                     style={{ opacity: hoveredIndex === index ? 1 : 0, pointerEvents: hoveredIndex === index ? "auto" : "none" }}
                   >
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="font-hand text-sm ink hand-underline hover:opacity-70 transition-opacity"
-                    >
-                      live ↗
-                    </a>
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="font-hand text-sm ink hand-underline hover:opacity-70 transition-opacity"
-                    >
-                      github ↗
-                    </a>
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-hand text-sm ink hand-underline hover:opacity-70 transition-opacity"
+                      >
+                        live ↗
+                      </a>
+                    )}
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-hand text-sm ink hand-underline hover:opacity-70 transition-opacity"
+                      >
+                        github ↗
+                      </a>
+                    )}
                   </div>
                 </div>
 
