@@ -43,7 +43,7 @@ const allProjects: Project[] = [
     title: "Talk-to-DB",
     description: "For people who just want to see data and not code for it. Converts voice to SQL queries using NLP.",
     year: "2025",
-    live: "https://talk-to-db.netlify.app/",
+    live: "https://talk-to-db-frontend-five.vercel.app/",
     github: "https://github.com/Tanvik01/talk-to-db",
     image: "/assets/talktodb.png",
   },
@@ -181,7 +181,7 @@ export function ProjectShowcase() {
                     }}
                     ref={(el) => {
                       if (el && isCurrent && el.paused) {
-                        el.play().catch(() => {})
+                        el.play().catch(() => { })
                       }
                     }}
                   />
