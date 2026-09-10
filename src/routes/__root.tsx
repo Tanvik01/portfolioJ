@@ -12,6 +12,8 @@ import { Analytics } from "@vercel/analytics/react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { LampToggle } from "../components/portfolio/LampToggle";
+import { GlobalCursor } from "../components/portfolio/GlobalCursor";
 
 function NotFoundComponent() {
   return (
@@ -113,6 +115,12 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
+      {/* LampToggle lives here so its state survives route navigation */}
+      <LampToggle />
+
+      {/* GlobalCursor binds to window — never disappears on any page or route */}
+      <GlobalCursor />
+
       <Outlet />
     </QueryClientProvider>
   );

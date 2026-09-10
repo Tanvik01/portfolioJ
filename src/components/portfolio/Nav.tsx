@@ -1,15 +1,25 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useLocation } from "@tanstack/react-router";
 
 const links = [
   { id: "about", label: "about" },
   { id: "experience", label: "experience" },
   { id: "work", label: "work" },
+  { id: "design", label: "design" },
   { id: "connect", label: "connect" },
 ];
 
 export function Nav() {
   const [hover, setHover] = useState<string | null>(null);
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
+
+  // On home: #section  →  same-page smooth scroll
+  // On sub-pages: /#section  →  navigate home then jump to section
+  const href = (id: string) => (isHome ? `#${id}` : `/#${id}`);
+  const homeHref = isHome ? "#top" : "/";
+
   return (
     <motion.nav
       initial={{ y: -30, opacity: 0 }}
@@ -18,7 +28,7 @@ export function Nav() {
       className="fixed left-1/2 top-4 z-40 -translate-x-1/2"
     >
       <div className="flex items-center gap-2 rounded-full border border-ink/30 bg-background/80 px-4 py-2 backdrop-blur-md">
-        <a href="#top" className="mr-2 text-ink" aria-label="home">
+        <a href={homeHref} className="mr-2 text-ink" aria-label="home">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
             <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
             <circle cx="9" cy="10" r="1" fill="currentColor" />
@@ -29,7 +39,7 @@ export function Nav() {
         {links.map((l) => (
           <a
             key={l.id}
-            href={`#${l.id}`}
+            href={href(l.id)}
             onMouseEnter={() => setHover(l.id)}
             onMouseLeave={() => setHover(null)}
             className="relative px-3 py-1 font-hand text-lg text-foreground/85 transition-colors hover:text-ink"
