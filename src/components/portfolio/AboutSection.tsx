@@ -31,7 +31,7 @@ export function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto w-full max-w-[1196px] md:h-[480px] rounded-[36px] md:rounded-[48px] overflow-hidden bg-[#282B4A] p-6 sm:p-8 md:p-[49px] grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
+          className="relative mx-auto w-full max-w-[1196px] md:min-h-[634px] rounded-[36px] md:rounded-[48px] overflow-hidden bg-[#282B4A] p-6 sm:p-8 md:p-[49px] grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
         >
           {/* Left Column: Text content */}
           <div className="md:col-span-7 flex flex-col justify-between h-full z-10">
@@ -45,8 +45,9 @@ export function AboutSection() {
               </p>
               <p>I think the interface is the product.</p>
               <p>
-                I'm a CS grad ('26), and along the way I've built real stuff at a couple of startups and won a hackathon I'm still proud of. When I'm not working on something, I'm probably losing an evening to my cats or whatever show everyone's talking about.
+                I'm a CS grad ('26) who loves building things from both sides, writing the code and designing the experience. I'm currently learning UI/UX because I genuinely enjoy turning ideas into interfaces that feel as good as they work.
               </p>
+              <p>Along the way, I've built real stuff at a couple of startups and won a hackathon I'm still proud of. I'm always learning, experimenting, and figuring out how to make the things I build a little more thoughtful. When I'm not working on something, I'm probably losing an evening to my cats or whatever show everyone's talking about.</p>
             </div>
 
             <div
@@ -59,11 +60,11 @@ export function AboutSection() {
 
           {/* Right Column: Photo with cat - 50px corner radius placed at 49px padding, NO shadow */}
           <div className="md:col-span-5 flex items-center justify-center md:justify-end h-full">
-            <div className="overflow-hidden rounded-[30px] sm:rounded-[40px] md:rounded-[50px] w-full max-w-[420px] max-h-[536px] flex items-center justify-center">
+            <div className="overflow-hidden rounded-[30px] sm:rounded-[40px] md:rounded-[50px] w-full max-w-[420px] flex items-center justify-center">
               <img
                 src={catImg}
                 alt="Tanvi with cat"
-                className="w-full h-auto object-cover select-none pointer-events-none"
+                className="w-full h-auto object-contain select-none pointer-events-none rounded-[30px] sm:rounded-[40px] md:rounded-[50px]"
                 draggable={false}
               />
             </div>

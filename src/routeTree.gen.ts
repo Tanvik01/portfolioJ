@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DesignWanderlyRouteImport } from './routes/design/wanderly'
 import { Route as DesignVaultRouteImport } from './routes/design/vault'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DesignWanderlyRoute = DesignWanderlyRouteImport.update({
+  id: '/design/wanderly',
+  path: '/design/wanderly',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DesignVaultRoute = DesignVaultRouteImport.update({
@@ -26,27 +32,31 @@ const DesignVaultRoute = DesignVaultRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/design/vault': typeof DesignVaultRoute
+  '/design/wanderly': typeof DesignWanderlyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/design/vault': typeof DesignVaultRoute
+  '/design/wanderly': typeof DesignWanderlyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/design/vault': typeof DesignVaultRoute
+  '/design/wanderly': typeof DesignWanderlyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/design/vault'
+  fullPaths: '/' | '/design/vault' | '/design/wanderly'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/design/vault'
-  id: '__root__' | '/' | '/design/vault'
+  to: '/' | '/design/vault' | '/design/wanderly'
+  id: '__root__' | '/' | '/design/vault' | '/design/wanderly'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DesignVaultRoute: typeof DesignVaultRoute
+  DesignWanderlyRoute: typeof DesignWanderlyRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/design/wanderly': {
+      id: '/design/wanderly'
+      path: '/design/wanderly'
+      fullPath: '/design/wanderly'
+      preLoaderRoute: typeof DesignWanderlyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/design/vault': {
@@ -71,6 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DesignVaultRoute: DesignVaultRoute,
+  DesignWanderlyRoute: DesignWanderlyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

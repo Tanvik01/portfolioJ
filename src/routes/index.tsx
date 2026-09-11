@@ -30,7 +30,6 @@ function Index() {
         {/* 3. Work */}
         <Projects />
 
-        <SectionDivider />
         <DesignSection />
         <SectionDivider />
         <Contact />

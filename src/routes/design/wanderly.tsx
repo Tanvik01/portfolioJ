@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { DecorativeStar } from "@/components/portfolio/DecorativeStar";
 import { SmoothScroll } from "@/components/portfolio/SmoothScroll";
 
-export const Route = createFileRoute("/design/vault")({
-  component: VaultCaseStudy,
+export const Route = createFileRoute("/design/wanderly")({
+  component: WanderlyCaseStudy,
 });
 
 /* ── Fade-up wrapper ── */
@@ -61,7 +61,7 @@ function SectionLabel({ n, label }: { n: string; label: string }) {
   );
 }
 
-function VaultCaseStudy() {
+function WanderlyCaseStudy() {
   return (
     <SmoothScroll>
       <main
@@ -169,21 +169,21 @@ function VaultCaseStudy() {
                     alignSelf: "flex-start",
                   }}
                 >
-                  Product · UI · 17 screens
+                  Travel / Web Design · Self-Directed Project
                 </span>
 
                 <h1
                   style={{
                     fontFamily: "'Montserrat', sans-serif",
                     fontWeight: 800,
-                    fontSize: "clamp(3.5rem, 8vw, 7.5rem)",
+                    fontSize: "clamp(3.2rem, 7vw, 6.5rem)",
                     color: "#EEEBDA",
                     lineHeight: 0.95,
                     margin: 0,
                     letterSpacing: "-0.03em",
                   }}
                 >
-                  Vault
+                  Wanderly
                 </h1>
 
                 <p
@@ -197,7 +197,7 @@ function VaultCaseStudy() {
                     fontStyle: "italic",
                   }}
                 >
-                  Saving with a finish line.
+                  Exploring South Korea with intention.
                 </p>
 
                 <p
@@ -210,7 +210,7 @@ function VaultCaseStudy() {
                     lineHeight: 1.6,
                   }}
                 >
-                  A goal-based savings redesign for Nivora Bank ·{" "}
+                  A travel discovery experience designed to make exploring South Korea feel more visual, personal, and effortless ·{" "}
                   <em>Self-directed practice project</em>
                 </p>
               </div>
@@ -227,8 +227,8 @@ function VaultCaseStudy() {
                 }}
               >
                 <img
-                  src="/assets/vault-detail.png"
-                  alt="Vault app: onboarding screen and goals dashboard"
+                  src="/assets/travel1.png"
+                  alt="Wanderly travel discovery experience: landing screen"
                   style={{
                     width: "100%",
                     height: "100%",
@@ -256,8 +256,7 @@ function VaultCaseStudy() {
             gap: "clamp(1.5rem, 3vw, 2.5rem)",
           }}
         >
-
-          {/* ── Full-width screens image ── */}
+          {/* ── Full-width Screen 1: History Page (travel2) ── */}
           <FadeUp>
             <div
               style={{
@@ -268,8 +267,8 @@ function VaultCaseStudy() {
               }}
             >
               <img
-                src="/assets/vault-screens.png"
-                alt="Vault app: manage goal, all goals, and goal details screens"
+                src="/assets/travel2.png"
+                alt="Wanderly: History and heritage curation page"
                 style={{
                   width: "100%",
                   height: "auto",
@@ -308,22 +307,31 @@ function VaultCaseStudy() {
                     margin: 0,
                   }}
                 >
-                  Nivora Bank's savings surface answers one question:{" "}
+                  Most travel platforms answer one question:{" "}
                   <em style={{ color: "#EEEBDA", fontWeight: 600 }}>
-                    how much do I have.
+                    what can I book next.
                   </em>{" "}
-                  It doesn't say what the money is for, or whether you're on
-                  track to get there. A trip, a pair of headphones, and an
-                  emergency buffer all sit in the same pot, so when it's time
-                  to spend, there's no signal you're borrowing from a plan you
-                  made yourself.
+                  They confront travelers with endless inventory grids, aggressive booking
+                  filters, and repetitive top-10 lists — burying the genuine atmosphere,
+                  neighborhood stories, and cultural texture that inspire someone to explore
+                  in the first place. Discovery begins to feel like sorting a spreadsheet rather
+                  than embarking on a journey.
                 </p>
 
                 <div style={{ display: "flex", flexDirection: "column", gap: "clamp(1rem, 1.8vw, 1.5rem)" }}>
                   {[
-                    { label: "No target, no pace", body: "A balance alone gives no feedback loop." },
-                    { label: "Setup is the drop-off", body: "Opening an RD or FD means a dense, jargon-heavy form." },
-                    { label: "Nothing to come back for", body: "A static number gives no reason to reopen the app." },
+                    {
+                      label: "Visual fatigue & density",
+                      body: "Overcrowded interfaces prioritize ad inventory over evocative photography and narrative.",
+                    },
+                    {
+                      label: "Culture flattened into lists",
+                      body: "Heritage sites and local food traditions are reduced to bullet points with star ratings.",
+                    },
+                    {
+                      label: "No intuitive sense of journey",
+                      body: "Fragmented pages force users to jump between disjointed maps, blogs, and booking engines.",
+                    },
                   ].map((gap, i) => (
                     <motion.div
                       key={gap.label}
@@ -388,7 +396,7 @@ function VaultCaseStudy() {
             </div>
           </FadeUp>
 
-          {/* ── 02 Three rules ── */}
+          {/* ── 02 The Goal & Principles ── */}
           <FadeUp delay={0.05}>
             <div
               style={{
@@ -397,7 +405,7 @@ function VaultCaseStudy() {
                 padding: "clamp(2rem, 4vw, 4rem)",
               }}
             >
-              <SectionLabel n="02" label="Three rules I designed against" />
+              <SectionLabel n="02" label="Three principles I designed against" />
               <div
                 style={{
                   display: "grid",
@@ -407,16 +415,16 @@ function VaultCaseStudy() {
               >
                 {[
                   {
-                    rule: "One decision per screen.",
-                    body: "Creating a goal is six questions, never bundled: what, name, amount, date, plan, payment method. A step counter keeps the end always in view.",
+                    rule: "Editorial narrative first.",
+                    body: "Lead with evocative full-bleed photography, curated historical context, and thoughtful storytelling rather than raw database entries.",
                   },
                   {
-                    rule: "Progress is the product.",
-                    body: "Every screen repeats the same three numbers: percentage, amount saved, days left. You never have to re-learn where to look.",
+                    rule: "Effortless destination context.",
+                    body: "Let visitors absorb the seasonal mood, cultural history, and rhythm of a Korean province before overwhelming them with scheduling details.",
                   },
                   {
-                    rule: "Products, not jargon.",
-                    body: "Savings, FD, and RD are shown as monthly amounts first, rate second. You compare ₹8,334 against ₹8,268, not 3.5% p.a. against 7% p.a.",
+                    rule: "Spacious visual pacing.",
+                    body: "Generous whitespace, structured hierarchy, and seamless typography give each destination room to breathe and inspire genuine wanderlust.",
                   },
                 ].map((item, i) => (
                   <motion.div
@@ -474,6 +482,30 @@ function VaultCaseStudy() {
             </div>
           </FadeUp>
 
+          {/* ── Full-width Screen 2: Destination / Exploration Page (travel3) ── */}
+          <FadeUp delay={0.05}>
+            <div
+              style={{
+                backgroundColor: "#EEEBDA",
+                borderRadius: "clamp(16px, 2.5vw, 28px)",
+                overflow: "hidden",
+                border: "1px solid rgba(40,43,74,0.12)",
+              }}
+            >
+              <img
+                src="/assets/travel3.png"
+                alt="Wanderly: Destination exploration and itinerary guide"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  display: "block",
+                  objectFit: "contain",
+                }}
+                draggable={false}
+              />
+            </div>
+          </FadeUp>
+
           {/* ── 03 + 04 side by side ── */}
           <div
             style={{
@@ -491,7 +523,7 @@ function VaultCaseStudy() {
                   height: "100%",
                 }}
               >
-                <SectionLabel n="03" label="The System" />
+                <SectionLabel n="03" label="Design Direction" />
                 <p
                   style={{
                     fontFamily: "'Montserrat', sans-serif",
@@ -503,9 +535,9 @@ function VaultCaseStudy() {
                     marginBottom: "1rem",
                   }}
                 >
-                  Two grounds, one meaning each: the six-step creation flow runs on
-                  navy, a one-time, focused setup. The daily shell (home, goals,
-                  activity, profile) runs on white, the place you keep coming back.
+                  Wanderly is anchored in an editorial design language: strong, elegant typographic scales,
+                  warm earthen neutrals, and deep navy structures that frame high-resolution photography.
+                  Instead of noisy conversion banners, the interface honors the destination's natural beauty.
                 </p>
                 <p
                   style={{
@@ -517,8 +549,8 @@ function VaultCaseStudy() {
                     margin: 0,
                   }}
                 >
-                  Color follows the same rule: red is progress-fill and destructive
-                  actions only. It never fights against the thing it represents.
+                  Layouts shift seamlessly between expansive scenic showcases and focused cultural vignettes,
+                  establishing natural visual pacing as travelers move through history, cuisine, and local highlights.
                 </p>
               </div>
             </FadeUp>
@@ -532,7 +564,7 @@ function VaultCaseStudy() {
                   height: "100%",
                 }}
               >
-                <SectionLabel n="04" label="What I'd test next" />
+                <SectionLabel n="04" label="Reflection & Next Steps" />
                 <p
                   style={{
                     fontFamily: "'Montserrat', sans-serif",
@@ -544,9 +576,9 @@ function VaultCaseStudy() {
                     marginBottom: "1rem",
                   }}
                 >
-                  Whether the six-step flow survives contact with real users, or
-                  needs to collapse to three. Whether the red progress arc reads as{" "}
-                  <em style={{ color: "#EEEBDA" }}>on track</em> or as an error state.
+                  Designing Wanderly independently reinforced how easily travel products regress into dense utility grids
+                  when inspiration should take priority. The core challenge was keeping the experience rich in imagery and
+                  story while keeping wayfinding and route discovery instantly clear.
                 </p>
                 <p
                   style={{
@@ -561,13 +593,12 @@ function VaultCaseStudy() {
                     borderLeft: "2px solid rgba(238,235,218,0.15)",
                   }}
                 >
-                  Neither was user-tested, designed on informed assumption, not
-                  research. That's the gap I'd close first if this became real.
+                  As a self-directed concept built on informed assumptions, the next step would be testing how real travelers
+                  navigate between atmospheric exploration and concrete day-by-day travel planning.
                 </p>
               </div>
             </FadeUp>
           </div>
-
 
           {/* ── Footer ── */}
           <FadeUp>
