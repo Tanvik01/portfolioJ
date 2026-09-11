@@ -21,7 +21,7 @@ const beliefs = [
 
 export function Beliefs() {
   return (
-    <section id="about" className="relative px-4 py-24">
+    <section id="beliefs" className="relative px-4 py-24">
       <div className="mx-auto max-w-6xl">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

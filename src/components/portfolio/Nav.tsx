@@ -1,24 +1,21 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { useLocation } from "@tanstack/react-router";
 
 const links = [
   { id: "about", label: "about" },
-  { id: "experience", label: "experience" },
   { id: "work", label: "work" },
   { id: "design", label: "design" },
   { id: "connect", label: "connect" },
 ];
 
 export function Nav() {
-  const [hover, setHover] = useState<string | null>(null);
   const { pathname } = useLocation();
   const isHome = pathname === "/";
 
-  // On home: #section  →  same-page smooth scroll
-  // On sub-pages: /#section  →  navigate home then jump to section
-  const href = (id: string) => (isHome ? `#${id}` : `/#${id}`);
-  const homeHref = isHome ? "#top" : "/";
+  // Home page: the Hero component owns its own nav — don't render the pill here
+  if (isHome) return null;
+
+  const href = (id: string) => `/#${id}`;
 
   return (
     <motion.nav
@@ -28,40 +25,21 @@ export function Nav() {
       className="fixed left-1/2 top-4 z-40 -translate-x-1/2"
     >
       <div className="flex items-center gap-2 rounded-full border border-ink/30 bg-background/80 px-4 py-2 backdrop-blur-md">
-        <a href={homeHref} className="mr-2 text-ink" aria-label="home">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="9" cy="10" r="1" fill="currentColor" />
-            <circle cx="15" cy="10" r="1" fill="currentColor" />
-            <path d="M8 14 Q 12 17, 16 14" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-          </svg>
+        <a
+          href="/"
+          className="mr-2 text-ink font-note text-base leading-none"
+          aria-label="home"
+          style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 600 }}
+        >
+          ←
         </a>
         {links.map((l) => (
           <a
             key={l.id}
             href={href(l.id)}
-            onMouseEnter={() => setHover(l.id)}
-            onMouseLeave={() => setHover(null)}
-            className="relative px-3 py-1 font-hand text-lg text-foreground/85 transition-colors hover:text-ink"
+            className="relative px-3 py-1 font-hand text-lg text-foreground/85 transition-colors hover:text-ink hover:underline underline-offset-4"
           >
             {l.label}
-            {hover === l.id && (
-              <motion.svg
-                layoutId="nav-underline"
-                className="absolute -bottom-1 left-0 w-full"
-                height="6"
-                viewBox="0 0 100 6"
-                preserveAspectRatio="none"
-              >
-                <path
-                  d="M2 4 Q 30 1, 50 3 T 98 2"
-                  stroke="var(--ink)"
-                  strokeWidth="1.6"
-                  fill="none"
-                  strokeLinecap="round"
-                />
-              </motion.svg>
-            )}
           </a>
         ))}
       </div>

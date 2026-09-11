@@ -1,15 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Nav } from "@/components/portfolio/Nav";
 import { SmoothScroll } from "@/components/portfolio/SmoothScroll";
-import { ScrollProgress } from "@/components/portfolio/ScrollProgress";
 import { SectionDivider } from "@/components/portfolio/SectionDivider";
 import { Hero } from "@/components/portfolio/Hero";
-import { Beliefs } from "@/components/portfolio/Beliefs";
-import { Experience } from "@/components/portfolio/Experience";
+import { AboutSection } from "@/components/portfolio/AboutSection";
 import { Projects } from "@/components/portfolio/Projects";
 import { DesignSection } from "@/components/portfolio/DesignSection";
-import { Skills } from "@/components/portfolio/Skills";
-import { NowPlaying } from "@/components/portfolio/NowPlaying";
 import { Contact } from "@/components/portfolio/Contact";
 import { useGlobalClickSound } from "@/hooks/use-click-sound";
 
@@ -22,20 +17,21 @@ function Index() {
 
   return (
     <SmoothScroll>
-      <main className="relative min-h-screen overflow-x-hidden bg-background">
-        <ScrollProgress />
-        <Nav />
+      <main
+        className="relative min-h-screen"
+        style={{ backgroundColor: "#EEEBDA", color: "#282B4A" }}
+      >
+        {/* 1. Hero */}
         <Hero />
-        <NowPlaying />
-        <Skills />
-        <SectionDivider />
-        <Experience />
-        <SectionDivider flip />
+
+        {/* 2. About */}
+        <AboutSection />
+
+        {/* 3. Work */}
         <Projects />
+
         <SectionDivider />
         <DesignSection />
-        <SectionDivider flip />
-        <Beliefs />
         <SectionDivider />
         <Contact />
       </main>
