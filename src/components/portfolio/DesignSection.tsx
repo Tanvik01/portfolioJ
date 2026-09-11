@@ -87,20 +87,47 @@ export function DesignSection() {
             />
           </div>
 
-          {/* Right Header Area: Controls + Section Title */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-end gap-5 sm:gap-10">
-            {/* ── Controls (Counter + Left & Right Arrows) matching Developer section ── */}
+          {/* Right Header Area: Section Title with Controls stacked below */}
+          <div className="flex flex-col items-end gap-3 sm:gap-4">
+            <div style={{ textAlign: "right" }}>
+              <p
+                className="font-sans"
+                style={{
+                  fontSize: "clamp(2rem, 5vw, 3.75rem)",
+                  color: "#282B4A",
+                  fontWeight: 700,
+                  lineHeight: 1,
+                  margin: 0,
+                }}
+              >
+                and my work
+              </p>
+              <p
+                className="font-note"
+                style={{
+                  fontSize: "clamp(0.7rem, 1.3vw, 0.95rem)",
+                  color: "#282B4A",
+                  opacity: 0.6,
+                  marginTop: "3px",
+                  letterSpacing: "0.04em",
+                }}
+              >
+                As a designer
+              </p>
+            </div>
+
+            {/* ── Controls (Counter + Left & Right Arrows) placed below "As a designer" ── */}
             {total > 1 && (
               <motion.div
-                initial={{ opacity: 0, y: 14 }}
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                className="flex items-center gap-4 self-start sm:self-auto mb-1 sm:mb-2"
+                className="flex items-center gap-4 mt-1"
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
                 {/* Counter */}
-                <span className="text-[#282B4A]/85 text-base sm:text-lg font-medium tracking-wider select-none min-w-[65px]">
+                <span className="text-[#282B4A]/85 text-base sm:text-lg font-medium tracking-wider select-none min-w-[65px] text-right">
                   {String(activeIndex + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
                 </span>
 
@@ -124,33 +151,6 @@ export function DesignSection() {
                 </div>
               </motion.div>
             )}
-
-            <div style={{ textAlign: "right" }}>
-              <p
-                className="font-sans"
-                style={{
-                  fontSize: "clamp(2rem, 5vw, 3.75rem)",
-                  color: "#282B4A",
-                  fontWeight: 700,
-                  lineHeight: 1,
-                  margin: 0,
-                }}
-              >
-                Work
-              </p>
-              <p
-                className="font-note"
-                style={{
-                  fontSize: "clamp(0.7rem, 1.3vw, 0.95rem)",
-                  color: "#282B4A",
-                  opacity: 0.6,
-                  marginTop: "3px",
-                  letterSpacing: "0.04em",
-                }}
-              >
-                As a designer
-              </p>
-            </div>
           </div>
         </div>
 

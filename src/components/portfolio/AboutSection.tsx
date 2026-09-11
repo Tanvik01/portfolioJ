@@ -18,10 +18,10 @@ export function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-right text-[#282B4A] font-medium text-4xl sm:text-5xl md:text-6xl tracking-wide uppercase"
+            className="text-right text-[#282B4A] font-medium text-4xl sm:text-5xl md:text-6xl tracking-wide lowercase"
             style={{ fontFamily: "'Montserrat', sans-serif" }}
           >
-            ABOUT
+            who i am
           </motion.h2>
         </div>
 

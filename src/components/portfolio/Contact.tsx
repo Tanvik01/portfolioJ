@@ -117,16 +117,16 @@ export function Contact() {
           transition={{ delay: 0.2 }}
           className="mt-12 sm:mt-14 flex flex-wrap items-center justify-center gap-3.5 sm:gap-4"
         >
-          {/* say hi → */}
+          {/* Email button */}
           <a
-            href="mailto:hello@tanvi.dev"
+            href="mailto:tanvikokitkar30@gmail.com"
             className="inline-flex items-center justify-center gap-2 rounded-full bg-[#282B4A] hover:bg-[#1a1c31] px-7 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-medium text-[#EEEBDA] select-none transition-all duration-200 hover:shadow-md active:scale-95"
             style={{
               fontFamily: "'Montserrat', sans-serif",
               fontWeight: 500,
             }}
           >
-            say hi →
+            tanvikokitkar30@gmail.com ↗
           </a>
 
           {/* github ↗ */}

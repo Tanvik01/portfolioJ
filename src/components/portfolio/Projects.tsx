@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { ProjectCard, type ProjectItem } from "@/components/portfolio/ProjectCard";
@@ -83,7 +83,7 @@ export function Projects() {
             style={{ fontFamily: "'Montserrat', sans-serif" }}
           >
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#282B4A] tracking-tight">
-              Work
+              my work
             </h2>
             <p className="text-lg sm:text-xl md:text-2xl font-medium text-[#282B4A]/90 mt-1">
               As a developer
