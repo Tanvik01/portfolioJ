@@ -18,7 +18,7 @@ export function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-right text-[#282B4A] font-medium text-4xl sm:text-5xl md:text-6xl tracking-wide lowercase"
+            className="text-right text-[#282B4A] font-bold text-4xl sm:text-5xl md:text-6xl tracking-wide lowercase"
             style={{ fontFamily: "'Montserrat', sans-serif" }}
           >
             who i am
@@ -41,11 +41,11 @@ export function AboutSection() {
             >
               <p>Hi, I'm Tanvi.</p>
               <p>
-                I can do backend, but frontend is where I actually have fun.
+                I'm a product designer who also builds what I design.
               </p>
-              <p>I think the interface is the product.</p>
+              <p>To me, the interface is the product.</p>
               <p>
-                I'm a CS grad ('26) who loves building things from both sides, writing the code and designing the experience. I'm currently learning UI/UX because I genuinely enjoy turning ideas into interfaces that feel as good as they work.
+                I enjoy building things from both sides, writing the code and designing the experience.
               </p>
               <p>Along the way, I've built real stuff at a couple of startups and won a hackathon I'm still proud of. I'm always learning, experimenting, and figuring out how to make the things I build a little more thoughtful. When I'm not working on something, I'm probably losing an evening to my cats or whatever show everyone's talking about.</p>
             </div>

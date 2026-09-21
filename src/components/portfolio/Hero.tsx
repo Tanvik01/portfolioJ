@@ -4,6 +4,7 @@ import { DecorativeStar } from "./DecorativeStar";
 
 const NAV_LINKS = [
   { id: "about", label: "ABOUT" },
+  { id: "experience", label: "EXPERIENCE" },
   { id: "work", label: "WORK" },
   { id: "design", label: "DESIGN" },
 ];
@@ -88,8 +89,8 @@ export function Hero() {
             fontSize: "clamp(1.25rem, 2.4vw, 37px)",
           }}
         >
-          Frontend Dev by Training,<br />
-          Design by Obsession
+          Designing interfaces,<br />
+          Building them too.
         </p>
       </div>
 

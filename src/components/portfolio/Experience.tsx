@@ -1,183 +1,112 @@
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import { useState } from "react";
+import { motion } from "framer-motion";
+import { DecorativeStar } from "./DecorativeStar";
 
-const experiences = [
+interface ExperienceItem {
+  role: string;
+  company: string;
+  dates: string;
+  line: string;
+  isCurrent?: boolean;
+}
+
+const experiencesData: ExperienceItem[] = [
   {
-    company: "Schneider Electric",
-    location: "Bengaluru, India",
-    dates: "Jul. 2025 – Sept. 2025",
-    role: "Frontend Intern",
-    color: "oklch(0.72 0.16 55)",
-    bullets: [
-      "Developed 5+ interactive business dashboards using JavaScript, D3.js, and Tableau, visualizing sales and supply chain data through responsive, data-driven interfaces",
-      "Built reusable visualization components, including filters, drill-downs, and KPI cards, for a multi-state performance dashboard,improving usability and cross-team readability; adopted by the regional leadership team",
-      " Collaborated with stakeholders to translate raw business requirements into clear visual design decisions, applying user-centered design thinking used in frontend development.",
-    ],
-    tags: ["Javascript", "UI/UX", "Data Viz", "Frontend"],
+    role: "Product Designer Intern",
+    company: "DNEG",
+    dates: "Sept 2026 – Present",
+    line: "Working for client Kotak Mahindra Bank with the design and development team.",
+    isCurrent: true,
   },
   {
-    company: "KrishLabs",
-    location: "Bengaluru, India",
-    dates: "Jan. 2025 – Apr. 2025",
+    role: "Data Visualization / Frontend Intern",
+    company: "Schneider Electric",
+    dates: "Jul 2025 – Sept 2025",
+    line: "Built dashboards in Tableau for a project with Schneider Electric's Energy & Automation division.",
+  },
+  {
     role: "Front-End Developer Intern",
-    color: "oklch(0.65 0.18 145)",
-    bullets: [
-      "Contributed to frontend development for two key products, improving feature delivery speed through modular design practices.",
-      "Developed and deployed a responsive, SEO-optimized website using React.js, contributing to increased organic traffic.",
-      "Designed interactive UI/UX components with Framer Motion to improve user engagement.",
-      "Collaborated with design and backend teams on API integration, ensuring pixel-perfect implementation.",
-    ],
-    tags: ["React.js", "Framer Motion", "SEO", "API"],
+    company: "KrishLabs",
+    dates: "Jan 2025 – Apr 2025",
+    line: "Contributed to frontend development for two key products.",
   },
 ];
 
 export function Experience() {
-  const [openIdx, setOpenIdx] = useState<number>(0);
-
   return (
-    <section id="experience" className="relative px-4 py-24">
-      <div className="mx-auto max-w-6xl">
+    <section
+      id="experience"
+      className="relative w-full overflow-clip px-4 sm:px-8 md:px-14 py-10 md:py-16"
+      style={{ backgroundColor: "#EEEBDA" }}
+    >
+      <div className="mx-auto max-w-[1196px] w-full">
+        {/* ── Section Header (Left: Title, Right: Decorative Star) ─────── */}
+        <div className="flex items-center justify-between mb-4 sm:mb-6">
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-left text-[#282B4A] font-bold text-4xl sm:text-5xl md:text-6xl tracking-wide lowercase"
+            style={{ fontFamily: "'Montserrat', sans-serif" }}
+          >
+            where i've been
+          </motion.h2>
+          <DecorativeStar type="small" size={52} rotation={12} />
+        </div>
+
+        {/* ── Main Experience Card (#282B4A, max-w-1196) ─────────────── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center"
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto w-full max-w-[1196px] rounded-[36px] md:rounded-[48px] overflow-hidden bg-[#282B4A] p-6 sm:p-8 md:p-12 text-[#EEEBDA]"
         >
-          <p className="font-hand text-xl ink/70">chapter II —</p>
-          <h2 className="mt-1 font-hand text-4xl md:text-6xl ink hand-underline inline-block">
-            where I've been
-          </h2>
-        </motion.div>
-
-        <div className="relative mt-20 grid gap-10 md:grid-cols-[240px_1fr] md:gap-14">
-          {/* Timeline rail */}
-          <div className="relative">
-            <div className="flex md:flex-col gap-4 md:gap-16 md:pt-6">
-              {experiences.map((exp, i) => (
-                <button
-                  key={exp.company}
-                  onClick={() => setOpenIdx(i)}
-                  className="group relative flex items-start gap-3 text-left"
-                >
-                  <motion.span
-                    animate={{ scale: openIdx === i ? 1.3 : 1 }}
-                    className="relative z-10 mt-1 h-4 w-4 shrink-0 rounded-full border-2"
-                    style={{
-                      borderColor: exp.color,
-                      background: openIdx === i ? exp.color : "var(--background)",
-                    }}
-                  />
-                  <div>
-                    <p className="font-note text-sm ink/60">{exp.dates}</p>
-                    <p
-                      className="font-hand text-2xl transition-colors"
-                      style={{ color: openIdx === i ? exp.color : "var(--foreground)" }}
-                    >
+          <div className="flex flex-col divide-y divide-[#EEEBDA]/15">
+            {experiencesData.map((exp, idx) => (
+              <div
+                key={idx}
+                className="py-6 first:pt-0 last:pb-0 flex flex-col justify-center"
+                style={{ fontFamily: "'Montserrat', sans-serif" }}
+              >
+                <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4">
+                  <div className="flex items-center flex-wrap gap-2 sm:gap-3">
+                    <span className="text-lg sm:text-xl md:text-2xl font-semibold text-[#EEEBDA]">
+                      {exp.role}
+                    </span>
+                    <span className="text-[#EEEBDA]/40 hidden sm:inline">·</span>
+                    <span className="text-base sm:text-lg md:text-xl font-medium text-[#EEEBDA]/90">
                       {exp.company}
-                    </p>
+                    </span>
+                    {exp.isCurrent && (
+                      <span
+                        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold tracking-wide ml-1 shadow-sm"
+                        style={{
+                          backgroundColor: "#EEEBDA",
+                          color: "#282B4A",
+                        }}
+                      >
+                        Present
+                      </span>
+                    )}
                   </div>
-                </button>
-              ))}
-            </div>
-          </div>
 
-          {/* Sticky note detail */}
-          <div className="relative min-h-[420px]">
-            {experiences.map((exp, i) => (
-              <StickyNote
-                key={exp.company}
-                exp={exp}
-                active={openIdx === i}
-                index={i}
-              />
+                  <span className="text-xs sm:text-sm md:text-base font-medium text-[#EEEBDA]/70 shrink-0">
+                    {exp.dates}
+                  </span>
+                </div>
+
+                <p className="mt-2 text-sm sm:text-base font-normal text-[#EEEBDA]/85 leading-relaxed">
+                  {exp.line}
+                </p>
+              </div>
             ))}
           </div>
-        </div>
+        </motion.div>
+
+        {/* ── Bottom border separator ──────────────────────────────── */}
+        <div className="mt-16 sm:mt-24 border-b border-[#282B4A]/20 w-full" />
       </div>
     </section>
-  );
-}
-
-function StickyNote({
-  exp,
-  active,
-  index,
-}: {
-  exp: (typeof experiences)[number];
-  active: boolean;
-  index: number;
-}) {
-  const rotX = useMotionValue(0);
-  const rotY = useMotionValue(0);
-  const rX = useTransform(rotY, [-50, 50], [8, -8]);
-  const rY = useTransform(rotX, [-50, 50], [-8, 8]);
-
-  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    rotX.set(e.clientX - r.left - r.width / 2);
-    rotY.set(e.clientY - r.top - r.height / 2);
-  };
-  const reset = () => {
-    rotX.set(0);
-    rotY.set(0);
-  };
-
-  if (!active) return null;
-
-  return (
-    <motion.div
-      key={exp.company}
-      initial={{ opacity: 0, y: 30, rotate: -3 }}
-      animate={{ opacity: 1, y: 0, rotate: index % 2 === 0 ? -1.5 : 1.5 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      onMouseMove={onMove}
-      onMouseLeave={reset}
-      style={{ rotateX: rX, rotateY: rY, transformPerspective: 1000 }}
-      className="relative bg-paper text-paper-foreground sketch-border paper-grid p-8 md:p-10 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)]"
-    >
-      <div className="absolute -top-3 left-10 h-6 w-24 -rotate-6 tape rounded-sm" />
-      <div className="absolute -top-3 right-10 h-6 w-20 rotate-3 tape rounded-sm" />
-
-      <div
-        className="inline-block rounded-full px-3 py-1 font-note text-xs"
-        style={{ background: exp.color, color: "oklch(0.15 0.02 30)" }}
-      >
-        {exp.role}
-      </div>
-
-      <h3 className="mt-4 font-display text-3xl md:text-4xl ink">{exp.company}</h3>
-      <p className="mt-1 font-note text-sm ink/60">
-        {exp.location} • {exp.dates}
-      </p>
-
-      <ul className="mt-6 space-y-4">
-        {exp.bullets.map((b, i) => (
-          <motion.li
-            key={i}
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.15 + i * 0.08 }}
-            className="flex gap-3 font-note text-base leading-relaxed ink/90"
-          >
-            <span className="mt-1 shrink-0 ink" aria-hidden>
-              ✦
-            </span>
-            <span>{b}</span>
-          </motion.li>
-        ))}
-      </ul>
-
-      <div className="mt-6 flex flex-wrap gap-2">
-        {exp.tags.map((t) => (
-          <span
-            key={t}
-            className="rounded-full border border-ink/40 px-3 py-1 font-hand text-base ink"
-          >
-            {t}
-          </span>
-        ))}
-      </div>
-    </motion.div>
   );
 }

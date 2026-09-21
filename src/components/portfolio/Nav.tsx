@@ -3,6 +3,7 @@ import { useLocation } from "@tanstack/react-router";
 
 const links = [
   { id: "about", label: "about" },
+  { id: "experience", label: "experience" },
   { id: "work", label: "work" },
   { id: "design", label: "design" },
   { id: "connect", label: "connect" },

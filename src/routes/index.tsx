@@ -3,6 +3,7 @@ import { SmoothScroll } from "@/components/portfolio/SmoothScroll";
 import { SectionDivider } from "@/components/portfolio/SectionDivider";
 import { Hero } from "@/components/portfolio/Hero";
 import { AboutSection } from "@/components/portfolio/AboutSection";
+import { Experience } from "@/components/portfolio/Experience";
 import { Projects } from "@/components/portfolio/Projects";
 import { DesignSection } from "@/components/portfolio/DesignSection";
 import { Contact } from "@/components/portfolio/Contact";
@@ -27,7 +28,10 @@ function Index() {
         {/* 2. About */}
         <AboutSection />
 
-        {/* 3. Work */}
+        {/* 3. Experience */}
+        <Experience />
+
+        {/* 4. Work */}
         <Projects />
 
         <DesignSection />
